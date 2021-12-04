@@ -1,5 +1,5 @@
-import  { useEffect, useLayoutEffect, useState } from 'react';
-import { Dimensions, ScaledSize,StyleSheet } from 'react-native';
+
+import {  ScaledSize,StyleSheet } from 'react-native';
 
 export type Dimension = {
     window: ScaledSize;
@@ -13,13 +13,17 @@ export const  useDimension = () => Dimension
         isLandScape:boolean,
         isLandScapeWindow:boolean,
         dimensions:{window:ScaledSize,screen:ScaledSize},
-        lessThanWidth:boolean,
-        lessThanHeight:boolean
+        lessThanWidth:boolean, // window size
+        lessThanHeight:boolean // window size
   }
   
   export type StyleMediaQuery =  StyleSheet.NamedStyles<any>
 
+  
+
   export const  useMediaQuery = (lessThanWidth:number | undefined,lessThanHeight:number | undefined) => MediaQueryData 
+
+  //style object
 
   export const  useStyleMinWidthQuery = <T extends any>(base:T, args:number[],styles:(StyleSheet.NamedStyles<T> | StyleSheet.NamedStyles<any>)[] ) => T 
 
@@ -30,6 +34,7 @@ export const  useDimension = () => Dimension
   export const  useStyleMaxHeightQuery = <T extends any>(base:T, args:number[],styles:(StyleSheet.NamedStyles<T> | StyleSheet.NamedStyles<any>)[] ) => T 
 
 
+  //any object
   export const  usePropsMaxWidthQuery = <T extends any>(base:T, args:number[],styles:any[] ) => T 
 
   export const  usePropsMinWidthQuery = <T extends any>(base:T, args:number[],styles:any[] ) => T 

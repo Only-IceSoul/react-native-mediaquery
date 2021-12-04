@@ -1,8 +1,8 @@
 {
   "name": "react-native-remediaquery",
   "title": "Reat Native Mediaquery",
-  "version": "1.0.1",
-  "description": "TODO",
+  "version": "1.0.2",
+  "description": "Responsive Android Web IOS",
   "main": "index.js",
   "files": [
     "README.md",
@@ -14,15 +14,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-reat-native-mediaquery.git",
-    "baseUrl": "https://github.com/github_account/react-native-reat-native-mediaquery"
+    "url": "git+https://github.com/Only-IceSoul/react-native-mediaquery.git",
+    "baseUrl": "https://github.com/Only-IceSoul/react-native-mediaquery"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "mediaquery",
+    "query",
+    "styles",
+    "responsive",
+    "web",
+    "android",
+    "ios",
+    "react"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "Juan J LF",
+    "email": "justinjlf21@gmail.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
