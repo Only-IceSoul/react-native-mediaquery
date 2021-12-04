@@ -19,7 +19,7 @@ or
 
 
 ```javascript
-import {DrawableView ,DrawableViewS,DrawableViewB, Color} from 'react-native-drawableview';
+import { useMediaQuery,usePropsMaxWidthQuery,usePropsMaxHeightQuery, useStyleMaxHeightQuery, useStyleMaxWidthQuery } from "react-native-remediaquery";
 
     //Max  descending order
     //Min  ascending order
