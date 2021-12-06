@@ -19,12 +19,12 @@ or
 
 
 ```javascript
-import { useMediaQuery,usePropsMaxWidthQuery,usePropsMaxHeightQuery, useStyleMaxHeightQuery, useStyleMaxWidthQuery } from "react-native-remediaquery";
+import { useMediaQuery,usePropsMaxWidth,usePropsMaxHeight, useStyleMaxHeight, useStyleMaxWidth } from "react-native-remediaquery";
 
     //Max  descending order
     //Min  ascending order
 
-    const styles = useStyleMaxWidthQuery(styleBase,
+    const styles = useStyleMaxWidth(styleBase,
         [
 
         1400,

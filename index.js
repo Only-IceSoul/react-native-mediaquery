@@ -1,7 +1,7 @@
 // main index.js
 
 import  { useEffect, useLayoutEffect, useState } from 'react';
-import { Dimensions, ScaledSize,StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
 
 
 export const  useDimension = () => {
@@ -33,8 +33,10 @@ export const  useDimension = () => {
       isLandScape:Screen.width > Screen.height,
       isLandScapeWindow:Window.width > Window.height,
       dimensions:{ window: Window, screen:Screen },
-      lessThanWidth:Window.width <= lessThanValue,
-      lessThanHeight: Window.height <= lessThanHeightValue
+      lessThanOrEqualWidth:Screen.width <= lessThanValue,
+      lessThanOrEqualHeight: Screen.height <= lessThanHeightValue,
+      lessThanOrEqualWidthWindow:Window.width <= lessThanValue,
+      lessThanOrEqualHeightWindow: Window.height <= lessThanHeightValue
     })
 
     useLayoutEffect(() => {
@@ -45,9 +47,11 @@ export const  useDimension = () => {
           setMediaQuery({
             isLandScape: screen.width > screen.height,
             isLandScapeWindow:window.width > window.height,
-            dimensions:{ window, screen }
-            ,lessThanWidth:window.width < lessThanValue,
-            lessThanHeight: window.height < lessThanHeightValue
+            dimensions:{ window, screen },
+            lessThanOrEqualWidth:screen.width < lessThanValue,
+            lessThanOrEqualHeight: screen.height < lessThanHeightValue,
+            lessThanOrEqualWidthWindow:window.width < lessThanValue,
+            lessThanOrEqualHeightWindow: window.height < lessThanHeightValue
           })
     
         }
@@ -59,9 +63,9 @@ export const  useDimension = () => {
   }
 
 
+  export const  useStyleMinWidth = (base, args,styles,dim ) => {
 
-  export const  useStyleMinWidthQuery = (base, args,styles ) => {
-
+    const d = dim === undefined ? 'window' : dim
 
     const updateStyle = (window,base)=>{
       if(args.length > 0 && (args.length === styles.length)){
@@ -78,7 +82,7 @@ export const  useDimension = () => {
       }
       return base
     }
-    const Window = Dimensions.get('window')
+    const Window = Dimensions.get(d)
 
     const [result, setResult] = useState(updateStyle(Window,base));
     
@@ -86,8 +90,9 @@ export const  useDimension = () => {
       let isMounted = true
       const subscription  = Dimensions.addEventListener(
         "change",
-        ({ window }) => {
-           let re = updateStyle(window,base)
+        ({ window,screen }) => {
+           let ws = d === 'screen' ? screen : window
+           let re = updateStyle(ws,base)
            if(isMounted) setResult(re)
         }
       );
@@ -101,8 +106,9 @@ export const  useDimension = () => {
 
   }
 
-  export const  useStyleMaxWidthQuery = (base, args,styles ) => {
+  export const  useStyleMaxWidth = (base, args,styles,dim ) => {
 
+    const d = dim === undefined ? 'window' : dim
 
     const updateStyle = (window,base)=>{
       if(args.length > 0 && (args.length === styles.length)){
@@ -119,15 +125,16 @@ export const  useDimension = () => {
       }
       return base
     }
-    const Window = Dimensions.get('window')
+    const Window = Dimensions.get(d)
     const [result, setResult] = useState(updateStyle(Window,base));
     
     useLayoutEffect(() => {
       let isMounted = true
       const subscription  = Dimensions.addEventListener(
         "change",
-        ({ window }) => {
-           let re = updateStyle(window,base)
+        ({ window ,screen }) => {
+          let ws = d === 'screen' ? screen : window
+           let re = updateStyle(ws,base)
            if(isMounted) setResult(re)
         }
       );
@@ -141,8 +148,9 @@ export const  useDimension = () => {
 
   }
 
-  export const  useStyleMinHeightQuery =(base, args,styles ) => {
+  export const  useStyleMinHeight =(base, args,styles,dim ) => {
 
+    const d = dim === undefined ? 'window' : dim
 
     const updateStyle = (window,base)=>{
       if(args.length > 0 && (args.length === styles.length)){
@@ -160,15 +168,16 @@ export const  useDimension = () => {
       return base
     }
 
-    const Window = Dimensions.get('window')
+    const Window = Dimensions.get(d)
     const [result, setResult] = useState(updateStyle(Window,base));
     
     useLayoutEffect(() => {
       let isMounted = true
       const subscription = Dimensions.addEventListener(
         "change",
-        ({ window }) => {
-           let re = updateStyle(window,base)
+        ({ window,screen }) => {
+          let ws = d === 'screen' ? screen : window
+           let re = updateStyle(ws,base)
            if(isMounted) setResult(re)
         }
       );
@@ -182,8 +191,9 @@ export const  useDimension = () => {
 
   }
 
-  export const  useStyleMaxHeightQuery = (base, args,styles )  => {
+  export const  useStyleMaxHeight = (base, args,styles,dim )  => {
 
+    const d = dim === undefined ? 'window' : dim
 
     const updateStyle = (window,base)=>{
       if(args.length > 0 && (args.length === styles.length)){
@@ -201,7 +211,7 @@ export const  useDimension = () => {
       return base
     }
 
-    const Window = Dimensions.get('window')
+    const Window = Dimensions.get(d)
     const [result, setResult] = useState(updateStyle(Window,base));
     
     useEffect(() => {
@@ -209,8 +219,9 @@ export const  useDimension = () => {
       let isMounted = true
       const subscription = Dimensions.addEventListener(
         "change",
-        ({ window }) => {
-           let re = updateStyle(window,base)
+        ({ window ,screen}) => {
+          let ws = d === 'screen' ? screen : window
+           let re = updateStyle(ws,base)
            if(isMounted) setResult(re)
         }
       );
@@ -225,8 +236,9 @@ export const  useDimension = () => {
   }
 
 
-  export const  usePropsMaxWidthQuery = (base, args,styles ) => {
+  export const  usePropsMaxWidth = (base, args,styles,dim ) => {
 
+    const d = dim === undefined ? 'window' : dim
 
     const updateStyle = (window,base)=>{
       if(args.length > 0 && (args.length === styles.length)){
@@ -243,15 +255,16 @@ export const  useDimension = () => {
       }
       return base
     }
-     const Window = Dimensions.get('window')
+     const Window = Dimensions.get(d)
     const [result, setResult] = useState(updateStyle(Window,base));
     
     useLayoutEffect(() => {
       let isMounted = true
       const subscription  = Dimensions.addEventListener(
         "change",
-        ({ window }) => {
-           let re = updateStyle(window,base)
+        ({ window,screen }) => {
+          let ws = d === 'screen' ? screen : window
+           let re = updateStyle(ws,base)
            if(isMounted) setResult(re)
         }
       );
@@ -263,8 +276,8 @@ export const  useDimension = () => {
     return result;
   }
 
-  export const  usePropsMinWidthQuery = (base, args,styles ) => {
-
+  export const  usePropsMinWidth = (base, args,styles,dim ) => {
+     const d = dim === undefined ? 'window' : dim
 
     const updateStyle = (window,base)=>{
       if(args.length > 0 && (args.length === styles.length)){
@@ -282,15 +295,16 @@ export const  useDimension = () => {
       return base
     }
 
-    const Window = Dimensions.get('window')
+    const Window = Dimensions.get(d)
     const [result, setResult] = useState(updateStyle(Window,base));
     
     useLayoutEffect(() => {
       let isMounted = true
       const subscription  = Dimensions.addEventListener(
         "change",
-        ({ window }) => {
-           let re = updateStyle(window,base)
+        ({ window,screen }) => {
+          let ws = d === 'screen' ? screen : window
+           let re = updateStyle(ws,base)
            if(isMounted) setResult(re)
         }
       );
@@ -303,8 +317,9 @@ export const  useDimension = () => {
 
   }
 
-  export const  usePropsMaxHeightQuery = (base, args,styles) => {
+  export const  usePropsMaxHeight = (base, args,styles,dim) => {
 
+    const d = dim === undefined ? 'window' : dim
 
     const updateStyle = (window,base)=>{
       if(args.length > 0 && (args.length === styles.length)){
@@ -322,15 +337,16 @@ export const  useDimension = () => {
       return base
     }
 
-  const Window = Dimensions.get('window')
+  const Window = Dimensions.get(d)
     const [result, setResult] = useState(updateStyle(Window,base));
     
     useLayoutEffect(() => {
       let isMounted = true
       const subscription  = Dimensions.addEventListener(
         "change",
-        ({ window }) => {
-           let re = updateStyle(window,base)
+        ({ window,screen }) => {
+          let ws = d === 'screen' ? screen : window
+           let re = updateStyle(ws,base)
            if(isMounted) setResult(re)
         }
       );
@@ -342,8 +358,8 @@ export const  useDimension = () => {
     return result;
   }
 
-  export const  usePropsMinHeightQuery = (base, args,styles ) => {
-
+  export const  usePropsMinHeight = (base, args,styles,dim ) => {
+    const d = dim === undefined ? 'window' : dim
 
     const updateStyle = (window,base)=>{
       if(args.length > 0 && (args.length === styles.length)){
@@ -361,15 +377,16 @@ export const  useDimension = () => {
       return base
     }
 
-    const Window = Dimensions.get('window')
+    const Window = Dimensions.get(d)
     const [result, setResult] = useState(updateStyle(Window,base));
     
     useLayoutEffect(() => {
       let isMounted = true
       const subscription = Dimensions.addEventListener(
         "change",
-        ({ window }) => {
-           let re = updateStyle(window,base)
+        ({ window,screen }) => {
+          let ws = d === 'screen' ? screen : window
+           let re = updateStyle(ws,base)
            if(isMounted) setResult(re)
         }
       );

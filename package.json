@@ -1,7 +1,7 @@
 {
   "name": "react-native-remediaquery",
   "title": "Reat Native Mediaquery",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Responsive Android Web IOS",
   "main": "index.js",
   "files": [
